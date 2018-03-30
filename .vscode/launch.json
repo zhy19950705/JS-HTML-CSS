@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "启动程序",
-            "program": "${workspaceFolder}/js\\闭包.js"
+            "program": "${workspaceFolder}/js\\Promise.js"
         }
     ]
 }

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style>
+        #tutorial{
+            border: 1px solid #000000;
+        }
+        #tutorial2{
+            border: 1px solid #000000;
+        }
+        #sjx{
+            border: 1px solid #000000;
+        }
+        #yuan{
+            border: 1px solid #000000;
+        }
+        #triangle-topleft{
+            width: 0;
+            height: 0;
+            border-top: 100px solid red;
+            border-right: 100px solid transparent;
+        }
+    </style>
+</head>
+<body onload="draw()">
+    <canvas id="tutorial" width="150" height="150"></canvas>
+    <canvas id="tutorial2" width="150" height="150"></canvas>
+    <canvas id="sjx" width="150" height="150"></canvas>
+    <canvas id="yuan" width="150" height="200"></canvas>
+    <canvas id="quadratic" width="150" height="150"></canvas>
+    <div id="triangle-topleft"></div>
+</body>
+<script>
+    function draw() {
+        let canvas=document.getElementById('tutorial');
+        let canvas2=document.getElementById('tutorial2');
+        let sjx=document.getElementById('sjx')
+        let yuan=document.getElementById('yuan')
+        if(canvas.getContext){
+            let ctx=canvas.getContext('2d');
+
+            ctx.fillStyle='rgb(200,0,0)';
+            ctx.fillRect(10,10,55,50)
+
+            ctx.strokeRect(20,20,55,50);
+
+            ctx.beginPath();
+            ctx.moveTo(75,50)
+            ctx.lineTo(100,75)
+            ctx.lineTo(100,25)
+            ctx.fill()
+        }
+        if(canvas2.getContext){
+            let ctx=canvas2.getContext('2d');
+            ctx.arc(75,75,50,0,Math.PI*2,true); // 绘制
+            ctx.moveTo(110,75);
+            ctx.arc(75,75,35,0,Math.PI,false);
+            ctx.moveTo(65,65);
+            ctx.arc(65,65,5,0,Math.PI*2,true)
+            ctx.moveTo(95,65)
+            ctx.arc(90,65,5,0,Math.PI*2,true)
+            ctx.stroke()
+        }
+        if(sjx.getContext){
+            let ctx=sjx.getContext('2d');
+
+            ctx.beginPath();
+            ctx.moveTo(25,25)
+            ctx.lineTo(105,25);
+            ctx.lineTo(25,105)
+            ctx.fill()
+
+            ctx.beginPath();
+            ctx.moveTo(125,125)
+            ctx.lineTo(125,45)
+            ctx.lineTo(45,125)
+            ctx.closePath()
+            ctx.stroke()
+        }
+        if(yuan.getContext){
+            let ctx=yuan.getContext('2d')
+
+            for(let i=0;i<4;i++){
+                for(let j=0;j<3;j++){
+                    ctx.beginPath();
+                    let x=25+j*50;
+                    let y=25+i*50;
+                    let radius=20;
+                    let startAngle=0;
+                    let endAngle=Math.PI+(Math.PI*j)/2;
+                    let anticlockwise=i%2!==0
+                    ctx.arc(x,y,radius,startAngle,endAngle,anticlockwise)
+                    if(i>1){
+                        ctx.fill()
+                    }else {
+                        ctx.stroke()
+                }
+
+                }
+            }
+        }
+    }
+
+    (function (root, factory) {
+        if (typeof define === 'function' && define.amd) {
+            define(factory);// AMD
+        } else if (typeof exports === 'object' && typeof module !== 'undefined') {
+            module.exports = factory(); // CommonJS
+        } else {
+            window.Progressbar = factory(); // Browser globals
+        }
+    }(this, function () {
+        function Progressbar(options){
+            this.id = options.id;
+            this.value = options.value || 0;
+            this.width = options.width || 200;
+            this.height = options.height || 200;
+            this.bgColor = options.bgColor || 'green';
+            this.barColor = options.barColor || 'red';
+            this.fontColor = options.fontColor || '#000';
+            if(options.init){
+                this.init();
+            }
+        }
+        Progressbar.prototype.init = function(){
+            var canvas = document.getElementById(this.id);
+
+            if(!canvas.getContext) {
+                throw new Error('your browser does not support canvas')
+            }
+
+            if(!this.id){
+                throw new Error('your need pass id ')
+            }
+
+            var width = parseInt(this.width);
+            var height = parseInt(this.height);
+            canvas.setAttribute('width',width);
+            canvas.setAttribute('height',height);
+
+            var ctx = canvas.getContext("2d");
+
+            var startAngle = 3 / 2 * Math.PI;
+            var percentage = 0;
+            var diffAngle = 0;
+            var cx = width / 2;
+            var cy = height / 2;
+            var timer = setInterval(draw, 50);
+            var value = this.value;
+            var bgColor = this.bgColor;
+            var barColor = this.barColor;
+            var fontColor = this.fontColor;
+
+            function draw(){
+                diffAngle = (percentage / 100) * Math.PI * 2;
+
+                //清除矩形区域
+                ctx.clearRect(0, 0, width, height);
+
+                ctx.beginPath();
+
+                //设置线段宽度
+                ctx.lineWidth = 15;
+
+                //绘制圆
+                ctx.arc(cx, cy, 50, 0, 2 * Math.PI, false);
+
+                //设置填充色
+                ctx.fillStyle = '#FFF';
+                ctx.fill();
+
+                //绘制图形轮廓
+                ctx.strokeStyle = bgColor;
+                ctx.stroke();
+
+                //绘制百分比进度
+                ctx.beginPath();
+                ctx.arc(cx, cy, 50, startAngle, diffAngle + startAngle, false);
+                ctx.strokeStyle = barColor;
+                ctx.stroke();
+
+                //绘制百分比文字
+                ctx.fillStyle = fontColor;
+                ctx.textAlign = 'center';
+                ctx.font = '16px serif';
+                ctx.fillText(percentage + '%', cx, cy + 6);
+
+                if (percentage >= value) {
+                    clearTimeout(timer);
+                }
+
+                percentage++;
+            }
+        }
+        return Progressbar;
+    }));
+
+    var progressbar1 = new Progressbar({ id: 'myCanvas1',value: 20 ,init: true })
+    var progressbar2 = new Progressbar({ id: 'myCanvas2',value: 30 ,init: true })
+</script>
+</html>
