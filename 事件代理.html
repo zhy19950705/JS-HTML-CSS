@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1">
+    <a href="#">a1</a>
+    <a href="#">a2</a>
+</div>
+<button id="btn">add a</button>
+</body>
+<script>
+    var div1 = document.getElementById('div1')
+
+    div1.addEventListener('click', function (e) {
+        console.log(e.target)
+        // e.target 可以监听到触发点击事件的元素是哪一个
+        var target = e.target
+        console.log(target.nodeName)
+        if (target.nodeName === 'A') {
+            // 点击的是 <a> 元素
+            alert(target.innerHTML)
+        }
+    })
+
+    let btn=document.getElementById('btn')
+    console.log(btn)
+    bindEvent(btn,'click',function (e) {
+        let p=document.createElement('a')
+        p.innerHTML='真真'
+        div1.appendChild(p)
+    })
+    function bindEvent(elem, type, selector, fn) {
+        // 这样处理，可接收两种调用方式 bindEvent(div1, 'click', 'a', function () {...}) 和 bindEvent(div1, 'click', function () {...}) 这两种
+        if (fn == null) {
+            fn = selector
+            selector = null
+        }
+
+        // 绑定事件
+        elem.addEventListener(type, function (e) {
+            var target
+            if (selector) {
+                // 有 selector 说明需要做事件代理
+                // 获取触发时间的元素，即 e.target
+                target = e.target
+                // 看是否符合 selector 这个条件
+                if (target.matches(selector)) {
+                    fn.call(target, e)
+                }
+            } else {
+                // 无 selector ，说明不需要事件代理
+                fn(e)
+            }
+        })
+    }
+</script>
+</html>

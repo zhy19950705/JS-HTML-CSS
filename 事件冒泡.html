@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1">
+    <p id="p1">激活</p>
+    <p id="p2">取消</p>
+    <p id="p3">取消</p>
+    <p id="p4">取消</p>
+</div>
+<div id="div2">
+    <p id="p5">取消</p>
+    <p id="p6">取消</p>
+</div>
+</body>
+<script>
+    function bindEvent(ele,event,fn) {
+      ele.addEventListener(event,fn)
+    }
+    let body=document.body
+    bindEvent(body,'click',function (e) {
+        alert('取消 ')
+    })
+    let p1=document.getElementById('p1')
+    bindEvent(p1,'click',function (e) {
+        e.stopPropagation()//阻止冒泡
+        alert('J激活 ')
+    })
+</script>
+</html>

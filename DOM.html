@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <p id="p2">p2</p>
+  <div id="div1"></div>
+</body>
+<script>
+    var div1=document.getElementById('div1')
+    //tagname获取集合
+    var divList=document.getElementsByTagName('div')
+    var containerList=document.getElementsByClassName('container')
+    //css选择器
+    var pList=document.querySelector('p')
+
+    var p1=document.createElement('p')
+    p1.innerHTML='真真'
+    div1.appendChild(p1)
+
+    var p2=document.getElementById('p2')
+    div1.appendChild(p2)
+
+    let div2=document.getElementById(p1)
+    let parent=div2.parentElement
+
+    let div3=document.getElementById('div1')
+    let child=div3.childNodes
+    div3.removeChild(child[0])
+</script>
+</html>

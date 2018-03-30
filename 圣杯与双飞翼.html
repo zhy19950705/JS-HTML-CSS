@@ -1,0 +1,81 @@
+<!-- 。所有 float 元素的父容器，一般情况下都应该加clearfix这个 class。 -->
+<div class="clearfix">
+    <p style="float:left">333</p>
+    <p style="float:left">444</p>
+</div>
+<header>圣杯布局</header>
+<div class="bd clearfix">
+    <div class="main text">mainmainmainmainmainmainmainmainmainmainmainmainmainmain</div>
+    <div class="left text">left</div>
+    <div class="right text">right</div>
+</div>
+<footer>footer</footer>
+<style>
+    * {
+        padding: 0;
+        margin: 0
+    }
+
+    .clearfix:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    .clearfix {
+        *zoom: 1;
+    }
+
+
+
+    .text {
+        text-align: center;
+        line-height: 200px;
+        font-size: 40px;
+        color: #fff
+    }
+
+    .bd {
+        overflow: hidden;
+        padding: 0 200px 0 200px;
+    }
+
+    header,
+    footer {
+        text-align: center;
+        width: 100%;
+        background-color: #bbbbbb;
+    }
+
+    .main {
+        float: left;
+        width: 100%;
+        height: 200px;
+        background-color: #ddd;
+    }
+
+    .left {
+        /* opacity: 0.5; */
+        float: left;
+        width: 200px;
+        height: 200px;
+        background-color: #da4242;
+        /* 产生布局效果的属性 */
+        margin-left: -100%;
+        position: relative;
+        left: -200px;
+    }
+
+    .right {
+        /* opacity: 0.5; */
+        float: left;
+        width: 200px;
+        height: 200px;
+        background-color: #4ddef1;
+        /* 产生布局效果的属性 */
+        margin-left: -200px;
+        position: relative;
+        left: 200px;
+    }
+</style>
+<!-- 双飞翼即在Main中再加一层maincontent，设置margin:0 200 0 200 -->
