@@ -1,0 +1,29 @@
+<style>
+    .hr.one-px{
+        height: 1px;
+        background: #000
+    }
+    .hr.scale-half{
+        height: 1px;
+        transform: scaleY(0.5);
+        transform-origin: 50% 100%;
+        background: #000
+    }
+    .hr.gradient{
+        height: 1px;
+        background: linear-gradient(0deg,#fff,#000)
+    }
+    .hr.boxshadow{
+        height: 1px;
+        background: none;
+        box-shadow: 0 0.5px 0 #000;
+    }
+</style>
+<p>1px</p>
+<div class="hr one-px"></div>
+<p>1px+scaleY(0.5)</p>
+<div class="hr scale-half"></div>
+<p>线性渐变</p>
+<div class="hr gradient"></div>
+<p>boxshadow</p>
+<div class="hr boxshadow"></div>
