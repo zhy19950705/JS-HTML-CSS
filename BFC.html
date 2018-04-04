@@ -1,0 +1,48 @@
+<header>BFC是块级格式化上下文，我们可以把它看作一个大盒子，一个独立的容器。这个容器就是一个BFC，其内部和外部不会有任何影响，在这个大盒子（BFC）中，你可以随便布局、浮动。 </header>
+<article>
+    <ul>
+        <li>边距重叠/边距吞噬</li>
+        <li>清除内部浮动，父级元素高度未加上浮动元素高度</li>
+        <li>浮动aslide重叠</li>
+    </ul>
+</article>
+<article>
+    <p>如何创建BFC</p>
+    <ul>
+        <li>float不为none</li>
+        <li>overflow为auto、hidden</li>
+        <li>display为inline-block、table=cell、flex</li>
+        <li>position不为static或relative</li>
+    </ul>
+    <p>BFC的特性</p>
+    <ul>
+        <li>计算BFC高度时，浮动子元素也会参与计算</li>
+        <li>BFC内部的box一个接一个放</li>
+        <li>BFC是页面上一个独立元素，和外界元素互不影响</li>
+        <li>BFC不会和浮动元素重叠</li>
+    </ul>
+</article>
+
+<section class="top">
+    <h3>上</h3>
+    margin-bottom:30px
+</section>
+<!-- <section class="bottom">
+    <h3>下</h3>
+    margin-top:50px重叠
+</section> -->
+<div style="overflow:hidden">
+    <section class="bottom">
+        <h3>下</h3>
+        margin-top:50px
+    </section>
+</div>
+<style>
+    .top {
+        margin-bottom: 20px
+    }
+
+    .bottom {
+        margin-top: 40px
+    }
+</style>

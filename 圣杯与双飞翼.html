@@ -79,3 +79,11 @@
     }
 </style>
 <!-- 双飞翼即在Main中再加一层maincontent，设置margin:0 200 0 200 -->
+
+<!-- 三栏自适应 -->
+float布局：左边float:left，右边float:right，中间块设置min-width即可
+absoluate定位：中间块设置距离父级节点的left:100px;right:100px;即可；当然父级节点positon不能为static
+flex布局：中间块flex-grow为1（默认0）；左右两边设置flex-basis:100px即可
+table布局：table``table-cell很容易
+grid布局：父级节点需要display:grid;然后网格流方向为grid-auto-flow:column;再然后grid-template-columns: 100px auto 100px;设置列宽
+
