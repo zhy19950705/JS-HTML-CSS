@@ -1,3 +1,4 @@
+// 词法作用域:定义在词法阶段的作用域
 function foo(){
     function bar(a){
          var i=3;
@@ -17,7 +18,7 @@ var a=2;
 })()
 // (function(){
 
-// })
+// })()
 console.log(a)
 
 // 始终给函数表达式命名
@@ -34,3 +35,4 @@ setTimeout(timeoutHandler=()=>{
     console.log(a);
     console.log(global.a)
 })
+

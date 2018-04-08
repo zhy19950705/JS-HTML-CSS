@@ -1,3 +1,14 @@
+//this的绑定和函数的声明的位置没有任何的关系，只取决于函数的调用方式。
+//当一个函数被调用的时候，会创建一个活动记录(执行上下文)，this记录其中的一个属性，会在函数执行的过程中用到
+// 每个函数的this是在调用时被绑定的，完全取决于函数的调用位置
+// 严格模式 下全局对象将无法使用默认绑定，因此会绑定到undefined
+
+// func(p1,p2)等价于func.call(undefined,p1,p2)
+// obj.child.method(p1,p2)等价于obj.child.method.call(obj.child,p1,p2)
+//func.call(context,p1,p2) context即this
+//this就是call一个函数时，传入的第一个参数
+
+
 function foo() {
     // console.log(this)
     setTimeout(() => this.a = 1,0)
@@ -52,3 +63,58 @@ function s(something) {
 }
 var bar=s.bind(obj)//2,3
 var b=bar(3)
+
+function foo2() {
+    // console.log(this)
+    this.count++
+}
+// foo2.count=0  //count成为全局变量
+foo2()
+
+//1、 默认绑定
+function m(){
+    // 调用栈m,调用位置全局作用域
+    console.log(this.a)
+}
+// 等于m.call(window)
+m()//window
+//2、 隐式绑定
+function n(){
+    console.log(this.a)
+}
+var n1={
+    a:1,
+    n:n
+}
+var n2={
+    a:2,
+    n1:n1
+}
+//对象属性链中只有最顶层或最后一层会影响调用位置 n2.n1.n.call(n1)
+n2.n1.n();//n1  1
+
+var gg=n1.n  //函数别名！引用的是函数本身，造成隐式丢失
+gg()  //3
+
+// 函数传递也是隐式赋值
+function doFoo(fn){
+    //fn其实引用的是n
+   fn
+}
+doFoo(n1.n)  //3
+
+//3、显示绑定
+foo.call(obj)
+//硬绑定
+var dd=function(){
+    foo.call(obj)
+}
+dd()   //2
+setTimeout(dd,100)  //2
+
+//4、new 绑定
+function NewFoo(a) {
+    this.a=a
+}
+var newBar=new NewFoo(2);
+console.log(newBar.a) //2

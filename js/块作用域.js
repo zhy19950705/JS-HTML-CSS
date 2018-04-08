@@ -1,3 +1,4 @@
+//es3就有了块作用域。with,catch
 for (var i = 0; i < 3; i++) {
     console.log(i)
 }
