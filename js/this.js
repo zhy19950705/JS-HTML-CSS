@@ -9,6 +9,13 @@
 //this就是call一个函数时，传入的第一个参数
 
 
+// 由new调用，绑定打新对象
+// 由call,apply调用，绑定到指定对象
+// 由上下文调用，绑定到上下文对象
+// 默认：在严格模式下绑定到undefined，否则绑定到全局对象
+// es6箭头函数继承外层this绑定，和self=this相同
+
+
 function foo() {
     // console.log(this)
     setTimeout(() => this.a = 1,0)
@@ -118,3 +125,32 @@ function NewFoo(a) {
 }
 var newBar=new NewFoo(2);
 console.log(newBar.a) //2
+
+// 箭头函数根据外层作用域决定this
+function foo(){
+    return (a)=>{
+        // this继承foo
+        console.log(a)
+    }
+}
+var obj1={
+    a:1
+}
+var obj2={
+    a:2
+}
+var bar=foo.call(obj1) //绑定
+bar.call(obj2) //1 
+// 箭头函数的this无法更改，像bind确定this被绑定到指定对象
+function foo(){
+    setTimeout(() => {
+        console.log(this.a) //绑定到foo
+    }, 100);
+}
+//js   self=this
+function foo(){
+    var self=this;
+    setTimeout(function(){
+        console.log(self.a)
+    },100)
+}

@@ -27,6 +27,8 @@ Object.assign()
 // 即浅拷贝只是拷贝了指向对象的指针。
 //    而深拷贝则是完全拷贝了整个值，创建了一个新的和原对象值一样的对象
 
+var newObj=JSON.parse(JSON.stringify(someObj))
+
 //1、遍历待拷贝对象  for...in 与hasOwnProperty进行联用
 //2、判断每个元素是不是原始值，若是，则使用浅度克隆进行拷贝
 //3、若是引用值，则需要判断是对象还是数组
