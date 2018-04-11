@@ -1,0 +1,5 @@
+<div style="width:100px;height=100px;border:10px;padding:10px">
+
+标准盒子模型 box-sizing:content-box：总宽度=content100px+border 10px*2+padding 10px*2 //140px
+怪异盒子模型 box-sizing:border-box: 总宽度=context 60px+border 10px*2+padding 10px*2  //100px
+当怪异盒子的宽度小于border+padding的宽度的时候，content width将变为0，盒子的宽度会被border和padding的总宽度撑开

@@ -45,6 +45,7 @@ var myObject={
         return 2
     }
 }
+
 myObject.a=3
 myObject.a  //2
 
@@ -86,3 +87,15 @@ it.next()  //{done:true}
 //for...in如果属性是不可枚举emurable:false，不会在循环中
 
 
+// 所有变量都可以使用toString(),除了undefined和null
+false.toString() //'false'
+[1,2,3].toString() // '1,2,3'
+1..toString() // '1'
+({a:'33'}).toString() //[object Object]
+// {A:'3'}.toString()  //Uncaught SyntaxError
+// 1.toString() //Uncaught SyntaxError
+
+// 封装一个判断变量数据类型的函数
+function type(obj){
+    return Object.prototype.toString.call(obj).slice(8,-1)
+}

@@ -1,0 +1,6 @@
+1、<img src='..' alt='alt信息'>
+当图片不输出信息时，会显示alt信息，鼠标放上去没有信息；当图片正常读取，不会出现alt信息
+2、<img src='#' alt='alt信息' title='title信息'>
+鼠标放上去都会出现title信息
+title的功能是提示，额外的说明信息和非本质的信息请使用title,title属性值可以比alt属性设置的更长
+title属性可以用在除了base，basefont，head，html，meta，param，script和title之外的所有标签

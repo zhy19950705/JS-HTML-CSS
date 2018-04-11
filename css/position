@@ -1,0 +1,4 @@
+static。默认值，不脱离文档流，top，right，bottom，left等属性不生效。
+relative。不脱离文档流，依据自身位置进行偏离，当子元素设置absolute，将依据它进行偏离。
+absolute。脱离文档流，依据top，right，bottom，left等属性在正常文档流中偏移位置。
+fixed。通过浏览器窗口进行定位，出现滚动条的时候，不会随之滚动。
