@@ -1,3 +1,8 @@
+//函数对象
+// 所有引用类型(函数，数组，对象)都拥有_proto_属性(隐式原型)
+// 所有函数都有prototype属性(显示原型)
+//原型对象：拥有prototype属性的对象，在定义函数时就被创建
+
 let obj={};
 obj.toString() //[object Object]
 // 即window.Object.prototype.toString.call(obj)

@@ -60,7 +60,6 @@ class Animal{
 class Dog extends Animal{
     constructor(name){
         super(name)
-        this.name=name
     }
     say(){
         console.log(`${this.name}啥样`)

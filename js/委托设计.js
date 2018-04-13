@@ -65,3 +65,124 @@ $(document).ready(function(){
 
     btn1.render($body)
 })
+
+// 使用Class实现
+class Widget{
+    constructor(width,height){
+        this.width=width||50;
+        this.height=width||50;
+        this.$elem=null;
+    }
+    render($where){
+        if(this.$elem){
+            this.$elem.css({
+                width:this.width+'px',
+                height:this.height+'px'
+            })
+        }
+    }
+}
+class Button extends Widget{
+    constructor(width,height,label){
+        super(width,height);
+        this.label=label||'Default';
+    }
+    render($where){
+        super($where);
+        this.$elem.click(this.onClick.bind(this))
+    }
+    onClick(evt){
+        console.log(this.label+'clicked')
+    }
+}
+
+// 委托控件对象
+var Widget={
+    init:function(width,height){
+        this.width=width||50;
+        this.height=height||50;
+        this.$elem=null;
+    },
+    insert:function($where){
+        if(this.$elem){
+            this.$elm.css({
+                width:width+'px',
+                height:height+'px'
+            }).appendTo($where)
+        }
+    }
+}
+var Button=Object.create(Widget)
+
+Button.setUp=function(width,height,label){
+    this.init(width,height);
+    this.label=label||'default',
+    this.$elem=$('button').text(this.label)
+}
+Button.build=function($where){
+    this.insert($wher);
+    this.$elem.click(this.onClick.bind(this))
+}
+Button.onClick=function(evt){
+    console.log(this.label+'clicked')
+}
+
+
+// 
+var LoginController={
+    errors:[],
+    getUser:function(){
+        return document.getElementById('login_username').value;
+    },
+    getPassword:function(){
+        return document.getElementById('login_password').value;
+    },
+    validateEntry:function(user,pw){
+        user=user||this.getUser();
+        pw=pw||this.getPassword();
+        if(!(user&&pw)){
+            return this.failure('dd')
+        }else if(pw.length<5){
+            return this.failure('dd')
+        }
+        return true
+    },
+    showDialog:function(title,message){
+       
+    },
+    failure:function(err){
+        this.errors.push(err);
+        this.showDialog('error',err)
+    }
+}
+// 让AuthController委托LoginController
+var AuthController=Object.create(LoginController)
+
+AuthController.errors=[];
+AuthController.checkAuth=function(){
+    var user=this.getUser();
+    var pw=this.getPassword();
+
+    if(this.validateEntry(user,pw)){
+        this.server('/check-auth',{
+            user:user,
+            pw:pw
+        }).then(this.accepted.bind(this))
+        .failure(this.rejected.bind(this))
+    }
+}
+
+AuthController.server=function(user,data){
+    return $.ajax({
+        url:url,
+        data:data
+    })
+}
+
+AuthController.accepted=function(){
+    this.showDialog('success','a')
+}
+
+AuthController.rejected=function(err){
+    this.showDialog('rejected',err)
+}
