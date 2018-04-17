@@ -1,5 +1,5 @@
-// Number,String,Boolean,Object,null,undefined,Symbol
-typeof null===Object  
+// number,string,boolean,object,null,undefined,Symbol
+typeof null=== "object"  
 
 // 数组字符串键值被强制转换为十进制数字
 var a=[];
