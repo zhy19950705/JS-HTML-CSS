@@ -22,6 +22,12 @@ JSON.stringify()
 // undefined、任意的函数以及 symbol 值，在序列化过程中会被忽略（出现在非数组对象的属性值中时）或者被转换成 null（出现在数组中时）。
 // 所有以 symbol 为属性键的属性都会被完全忽略掉，即便 replacer 参数中强制指定包含了它们。
 // 不可枚举的属性会被忽略
+
+JSON.stringify(undefined)  //undefined
+JSON.stringify([1,undefined,function(){},4])  //"[1,null,null,4]"
+JSON.stringify({a:2,b:function(){}})  //"{"a":2}"
+
+// replacer可以是数组或者函数，用来指定哪些属性应该被处理，哪些应该被排除
 function replacer(key,value){
     if(typeof value === 'string'){
        return undefined
