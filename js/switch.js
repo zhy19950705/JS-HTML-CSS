@@ -10,7 +10,7 @@ switch(true){
     default:
 }
 
-// switch中的true和true仍然是严格相等
+// switch中的true 和true仍然是严格相等
 var a='hello world';
 var b=10;
 switch(true){
