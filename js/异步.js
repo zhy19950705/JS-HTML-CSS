@@ -75,3 +75,63 @@ const sleep=(timeoutMS)=>new Promise((resolve)=>{
     await sleep(1000);
     console.log(new Date(),i)
 })()
+
+
+// async/await地狱
+(async()=>{
+    const pizzaData=await getPizzaData()
+    const drinkData=await getDrinkData()
+    const chosenPizza=choosePizza();
+    const chosenDrink=chooseDrink();
+    await addPizzaToCart(chosenPizza);
+    await addDrinkToCart(chosenDrink);
+    orderItems()
+})()   //无并发操作
+async function orderItems(){
+    const items=await getCartItems();
+    const noOfItems=items.length;
+    for(var i=0;i<noOfItems;i++){
+        await sendRequest(items[i])
+    }  //for循环需要等待sendRequest函数完成后才能进行下一个迭代
+}
+
+// 忘记await，异步函数返回promise
+(async()=>{
+   const promise=doSomeAsyncTask()//一个未完成的promise
+   const value=await promise
+   console.log(value)  //实际返回值
+})()
+
+
+// 并发执行async函数
+async function selectPizza(){
+    const pizzaData=await getPizzaData(); //异步
+    const chosenPizza=chosenPizza(); //同步
+    await addPizzaToCart(chosenPizza) //异步
+}
+async function selectDrink(){
+    const drinkData=await getDrinkData();
+    const chosenDrink=chooseDrink();
+    await addDrinkToCart(chosenDrink)
+}
+// (async()=>{
+//     const pizzaPromise=selectPizza();
+//     const drinkPromise=selectDrink();
+//     await pizzaPromise
+//     await drinkPromise
+//     orderItems
+// })()
+(async()=>{
+    Promise.all([selectPizza().selectDrink()]).then(orderItems)
+})()
+// 创建一个数组，将 promise push 进去。然后使用 Promise.all() 我们就可以并行等待所有的 promise 处理完毕
+async function orderItems(){
+    const items=await getCartItems();
+    const noOfItems=items.length;
+    const promises=[];
+    for(var i=0;i<noOfItems;i++){
+        const orderPromise=sendRequest(items[i]);
+        promises.push(orderPromise)
+    }
+    await Promise.all(promises)
+}
