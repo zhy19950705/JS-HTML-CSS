@@ -1,0 +1,19 @@
+<div id="mvvp-app">
+    <input type="text" v-model="word">
+    <p>{{word}}</p>
+    <button v-on:click="sayHi">change model</button>
+</div>
+<script src="observer.js"></script>
+<script>
+    var vm=new MVVM({
+        el:'#mvvp-app',
+        data:{
+            word:'hello world'
+        },
+        methods:{
+            sayHi:function(){
+                this.word='hi everybody'
+            }
+        }
+    })
+</script>

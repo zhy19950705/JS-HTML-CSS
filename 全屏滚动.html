@@ -56,6 +56,20 @@
         }
     };
     function goUp(){
-        
+        if(-this.container.offsetTop>=this.viewHeight){
+            this.currentPosition=this.currentPosition+this.viewHeight;
+            this.turnPage(this.currentPosition)
+        }
+    }
+    function goDown(){
+        if(-this.container.offsetTop<=this.viewHeight*(this.pagesNum-2)){
+            this.currentPosition=this.currentPosition-this.viewHeight;
+            this.turnPage(this.currentPosition)
+        }
+    }
+    if(navigator.userAgent.toLowerCase().indexOf('firefox')===-1){
+        document.addEventListener('mousewheel',scrollMouse)
+    }else{
+        document.addEventListener('DOMMouseScroll',scrollMouse)
     }
 </script>

@@ -122,7 +122,7 @@ async function selectDrink(){
 //     orderItems
 // })()
 (async()=>{
-    Promise.all([selectPizza().selectDrink()]).then(orderItems)
+    Promise.all([selectPizza(),selectDrink()]).then(orderItems)
 })()
 // 创建一个数组，将 promise push 进去。然后使用 Promise.all() 我们就可以并行等待所有的 promise 处理完毕
 async function orderItems(){
