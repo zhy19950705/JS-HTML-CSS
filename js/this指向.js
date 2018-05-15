@@ -51,7 +51,7 @@ obj1.cool()
 //箭头函数涉及this绑定时，放弃普通this绑定规则，使用当前的词法作用域覆盖this本来的值
 //继承cool函数的this绑定
 let obj3={
-    count:0,
+    count:1,
     cool:function coolFn() {
         if(this.count<1){
             setTimeout(()=>{
@@ -89,3 +89,18 @@ var obj={
   }
 }
 obj.method(fn,1)  //10,2
+
+// 箭头函数this
+// this在 定义时绑定，继承自父执行上下文中的this;这里的this与cool平级，
+// 也就是箭头函数本身所在的对象为obj3,而obj3的父执行上下文为window
+var x=11;
+var obj={
+    x:22,
+    // say:function(){
+    //     console.log(this.x)  //22
+    // }
+    say:()=>{
+        console.log(this.x)
+    }
+}
+obj.say()

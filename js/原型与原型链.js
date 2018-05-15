@@ -53,3 +53,29 @@ Object.defineProperties(Object.prototype,'_proto_',{
         return o
     }
 })
+
+
+// 原型继承的 缺点
+function Shape(){}
+function Rect(){}
+Rect.prototype=new Shape()  //父类实例属性为引用类型时，不恰当地修改会导致所有子类被修改
+Rect.prototype=Shape.prototype  //父类构造函数原型与子类相同。修改子类原型添加方法会修改父类
+Rect.prototype=Object.create(Shape.prototype)
+Rect.prototype.area=function(){
+
+}//兼容性
+
+// 改进
+function Rect(){
+    Shape.call(this)
+}//在子类构造函数中调用父类构造函数实现实例属性初始化
+Rect.prototype.constructor=Rect; //新创建的对象替代子类默认原型
+function create(obj){
+    if(Object.create){
+        return Object.create(obj)
+    }
+    function f(){}
+    f.prototype=obj
+    return new f()
+}
+

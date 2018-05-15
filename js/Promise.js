@@ -86,3 +86,31 @@ Promise.prototype.then=function(onFullfilled,onRejected){
         onRejected(self.reason)
     }
 }
+
+
+var p=Promise.resolve(21);
+p.then(function(v){
+    return new Promise(function(resolve,reject){
+        setTimeout(()=>{
+            resolve(v*2)
+        },100)
+    })
+})
+.then(function(v){
+    console.log(v)
+})//42
+
+// 阐释链接
+const delay = (time)=>{
+  return new Promise(function(resolve,reject){
+      setTimeout(resolve,time)
+  })
+}
+delay(1000).then(()=>{
+    console.log('step2')
+    return delay(1000)
+})
+.then(()=>{
+    console.log('step3')
+    return delay(1000)
+})

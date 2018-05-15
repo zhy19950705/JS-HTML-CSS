@@ -1,0 +1,32 @@
+<style>
+   .container{
+       overflow: hidden;
+   }
+   .right{
+       width: 400px;
+       margin-bottom: -2000px;
+       padding-bottom: 2000px;
+       background: red;
+       float: right;
+   }
+   .left{
+    width: 200px;
+       margin-bottom: -2000px;
+       padding-bottom: 2000px;
+       background: greenyellow;
+       float: left; 
+   }
+   .center{
+       margin: 0 410px 0 210px;
+       background: goldenrod;
+       height: 400px
+   }
+</style>
+<body>
+    <div class="container">
+        <div class="left">left</div>
+        <div class="right">right</div>
+        <div class="center">margin负值实现分栏高度显示一致可以说是最好的方法，当然，还有其他一些轻便的替代方法。例如使用min-height属性，IE6不支持min-height但是height会自动撑高，所以min-height + _height的组合也是常用手段之一；另外就是使用背景图片了，利用背景图片的垂直平铺，可以模拟分栏的等高背景效果，
+            但是，此方法对布局宽度有一定的要求，如果布局宽度改变，背景图片可能也要做一番修改。</div>
+    </div>
+</body>
