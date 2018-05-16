@@ -44,10 +44,15 @@
             background-color: blue;
         }
         .parent2{
+            display: table;
+            height: 300px;
+            width: 300px;
+            background: brown
+        }
+        .child4{
             display: table-cell;
             text-align: center;
             vertical-align: middle;
-            width: 1000px;
         }
         .parent3{
             display: flex;
@@ -74,6 +79,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            优点：方便，支持webkit内核
+            缺点：transform兼容性差，IE9以下不支持
         </div>
     </div>
     <h3>定位</h3>
@@ -82,7 +89,8 @@
     </div>
     <h3>当要被居中的元素是inline或者inline-block元素</h3>
     <div class="parent2">
-        <p class="child4" style="color: #ff1b0c;">111</p>
+        <p class="child4" style="color: #ff1b0c;">cell-table 优势：父元素可以动态改变高度。
+                劣势：table属性容易造成多次reflow,IE8以下不支持</p>
     </div>
     <h3>flex</h3>
     <div class="parent3">

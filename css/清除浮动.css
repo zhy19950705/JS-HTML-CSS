@@ -1,0 +1,15 @@
+/* 使用伪类 */
+.father:after{
+    clear: both;
+    content: "";
+    display: block;
+}
+.father{
+    zoom:1 
+    /* IE专有属性，解决ie6、7浮动问题 */
+}
+/* 父级标签触发BFC */
+.father{
+    overflow: auto;
+    zoom:1
+}

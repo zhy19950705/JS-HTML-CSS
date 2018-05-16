@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+    <head>
+        <meta charset="UTF-8">
+        <title>单行读文本</title>
+    </head>
+    <script src="https://cdn.bootcss.com/jquery/1.4.0/jquery.min.js"></script>
+    <body>
+            <input type="file" onchange="turn()" id="text">
+            <div id="result" style="height:500px;"></div>
+            <script>
+                function turn(){
+       var file = $("#text")[0].files[0];
+//       指定上传文件为txt格式
+       if(file.name.split(".")[file.name.split(".").length - 1] != "txt"){
+           alert("请上传格式为TXT的文件。")
+       }else{
+           var reader = new FileReader;
+           reader.readAsDataURL(file);
+           reader.onload = function(evt){
+               var data = evt.target.result;
+               var encoding = checkEncoding(data);
+               Papa.parse(file,{
+                   encoding : encoding,
+                   complete : function(res){
+                       var data = res.data;
+                       var str = data.join("<br/>");
+                       $("#result").html(str);
+                   }
+               })
+           }
+       }
+   }
+//   验证上传文件编码
+    function checkEncoding(base64Str){
+//       指定上传文件文本格式
+       var str = atob(base64Str.split(";base64,")[1]);
+       var encoding = jschardet.detect(str);
+       encoding = encoding.encoding;
+       if(encoding == "window-1252"){
+           encoding = "ANSI";
+       }
+       return encoding;
+    }
+            </script>
+    </body>
+    
+</html>
