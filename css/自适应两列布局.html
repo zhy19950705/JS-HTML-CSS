@@ -1,11 +1,36 @@
 <style>
    .father{
-       background: border-box
+       background:lightblue;
+   }
+   .left{
+       float: left;
+       width: 100px;
+       height: 200px;
+       background: lightcoral
+   }
+   .right{
+       overflow: auto;
+       height: 500px;
+       background: rgb(247, 205, 205)
+   }
+   .left2{
+       width: 200px;
+       height: 300px;
+       float: left;
+       background: rgb(170, 241, 180)
+   }
+   .right2{
+       margin-left: 200px;
+       background: rgb(225, 243, 125)
    }
 </style>
 <body>
     <div class="father">
         <div class="left">left</div>
-        <div class="right">right</div>
+        <div class="right">右边元素触发BFC</div>
+    </div>
+    <div class="father" style="margin-top:10px">
+        <div class="left2">left2</div>
+        <div class="right2">margin-left实现</div>
     </div>
 </body>
