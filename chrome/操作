@@ -1,0 +1,23 @@
+选择DOM元素
+$('tagname')
+$$('tagname')
+
+将浏览器转换为编辑器
+document.body.contentEditable
+
+在DOM中寻找与某个元素相关联的Event
+getEventListeners($('selector'))
+
+监测Events
+monitorEvents($('selector'))
+
+确定某个代码段执行时间
+console.time('myTime')
+for(..){
+    ..
+}
+console.timeEnd('myTime')
+//output mytime:1ms
+
+列出元素的Property
+dir($('selector'))   它会返回一个带有所有property的对象

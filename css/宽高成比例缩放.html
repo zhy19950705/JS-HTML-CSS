@@ -1,17 +1,40 @@
+<!DOCTYPE html>
 <style>
-    body{
+    * {
+        padding: 0;
+        margin: 0
+    }
+
+    .parent {
         display: flex;
         justify-content: center;
         align-items: center;
+        /* position: relative; */
+        height: 1000px;
+        background: cadetblue;
     }
-    .item{
-        width: 50%;
+
+    .child {
+        width:calc(100% - 20px) ;
         height: 0;
-        /* 50%*16/9 */
-        padding-bottom: 28.125%;
-        background: #dbe0e4
+        /* 50%*11/2 */
+        padding-bottom: 50%; 
+        background-color: #6ce77c;
+        text-align: center;
+        font-size: 20px;
+        /* position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); */
     }
 </style>
+
 <body>
-    <div class="item">111</div>
+    <div class="parent">
+        <div class="child"> A元素垂直居中
+                A元素距离屏幕左右各边各10px
+                A元素里的文字font—size:20px,水平垂直居中
+                A元素的高度始终是A元素宽度的50%
+               </div>
+    </div>
 </body>

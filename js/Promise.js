@@ -114,3 +114,23 @@ delay(1000).then(()=>{
     console.log('step3')
     return delay(1000)
 })
+
+// api
+new Promise()
+Promise.resolve()
+Promise.reject()
+.then()
+.catch()
+Promise.all([])
+Promise.rase([])
+
+
+// 局限性
+// 1、顺序处理错误，Promise链中的错误容易被默默忽略，catch无法捕捉
+// 2、单一值,Promise只能有一个完成值或一个拒绝理由
+// 3、单决议。Promise只能被决议一次
+// 出现无法取消的Promise,无法从外部停止进程
+
+
+// 解决了只用回调的代码而备受困扰的控制反转问题
+// 用Promise链 顺序表达异步流
