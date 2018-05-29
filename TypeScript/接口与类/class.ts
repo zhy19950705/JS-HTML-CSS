@@ -81,7 +81,7 @@ function getPerson2(p:Person6){
    
 }
 // 数字可以转换成文字，文字不一定能转成数字
-getPerson2({0:2,some:'22'})
+// getPerson2({0:2,some:'22'})
 
 // 描述函数
 interface Db{
