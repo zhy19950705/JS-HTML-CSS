@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<style>
+   .animated{
+       text-align: center;
+       width: 60px;
+       height: 40px;
+       background: #6699FF;
+       color:#ffffff;
+       position: relative;
+       font-weight: bold;
+       font-size: 20px;
+       padding: 10px;
+       animation: animated 5s infinite;
+       -moz-animation: animated 5s infinite;
+       -webkit-animation: animated 5s infinite;
+       border-radius: 5px;
+       -webkit-border-radius:5px;
+   }
+   @keyframes animated {
+       0%{
+           left: 0px;
+       }
+       20%{
+           left: 50px;
+           background-color: green
+       }
+       40%{
+           left: 140px;
+           background-color: red;
+       }
+       100%{
+           left: 0px;
+           background: pink
+       }
+   }
+</style>
+<body>
+    <div class="animated">
+        css3动画
+        <span style="font-size:10px">Tutorial</span>
+    </div>
+</body>
