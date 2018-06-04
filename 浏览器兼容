@@ -1,0 +1,84 @@
+使用meta标签来调节浏览器的渲染方式，告诉浏览器用哪种内核渲染，360双核浏览器就是在ie和chrome之间来回切换，现在使用meta标签来强制使用最新的内核渲染页面
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+rgba不支持IE8
+解决：用opacity
+
+
+CSS3前缀
+-webkit- webkit渲染引擎  chrome/safari
+-moz gecko引擎	firefox
+-ms- trident渲染引擎 IE
+-o-	opeck渲染引擎 opera
+
+
+过渡不兼容IE8，可以用JS动画实现
+
+
+background-size不支持IE8，可以用img
+
+
+使用PIE.htc让IE6/7/8支持CSS3部分属性，像CSS3的border-radius，box-shadow，css backgrounds(-pie-background),Gradients,RGBA属性
+.border-radius {
+border-radius: 10px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+background: #abcdef;
+behavior: url(css/PIE.htc);
+ }
+
+
+用css hack
+IE6: _
+IE7/7: *
+IE7/Firefox: !important
+IE7: *+
+IE6/7/8: \9
+IE8: \0
+
+
+
+IE浮动下margin产生的双倍距离，通常使用float:left来实现，浏览器存在兼容性问题，导致图片与后面的内容存在margin不一致的问题，解决方法就是给图片添加diaplay:inline即可
+
+
+ie8不支持nth-child，但支持first-child和last-child，可以通过转化写法来处理问题，span:nth-child(2)可以转换为span:first-child+span,可以使ie8显示该内容，last-child可以自定义一个class类兼容ie8写法
+
+
+IE8下不支持HTML5属性placeholder，解决问题的js插件挺多的，常用的使用jquery.JPlaceholder.js插件处理问题
+
+
+识别HTML5元素，IE中可能无法识别nav/footer，使用html5shiv
+
+
+火狐下表单阻止表单默认提交事件：在form中添加 action="javascript:",秒杀上述所有默认行为;
+
+
+始终为按钮button添加type属性，IE下的默认类型是button，其他浏览器下的默认类型是submit
+
+
+IE下删除所有不必要的console语句，IE下当遇到console时不识别之后报错，代码不会执行，或者全局自定义一个window.console方法
+
+
+IE浏览器下由于参数过长导致通过GET请求下载文件方法报错，解决改为POST请求
+
+
+IE浏览器下iframe弹窗中输入框光标丢失（无法输入）问题，解决清一下frame
+
+
+兼容IE8 new Date()返回NaN问题，解决自定义方法
+function parseISO8601(dateStringInRange) {
+    var isoExp = /^\s*(\d{4})-(\d\d)-(\d\d)\s*$/,
+        date = new Date(NaN), month,
+        parts = isoExp.exec(dateStringInRange);
+
+    if(parts) {
+        month = +parts[2];
+        date.setFullYear(parts[1], month - 1, parts[3]);
+        if(month != date.getMonth() + 1) {
+            date.setTime(NaN);
+        }
+    }
+    return date;
+}
+

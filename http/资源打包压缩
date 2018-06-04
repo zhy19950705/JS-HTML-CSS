@@ -1,0 +1,54 @@
+结合前端工程化思想，我们在对上线文件进行自动化打包编译时，通常都需要打包工具的协助，这里我推荐webpack，
+我通常都使用Gulp和Grunt来编译node，Parcel太新，而且webpack也一直在自身的特性上向Parcel靠拢。
+1、js压缩
+new webpack.optimize.UglifyJsPlugin()
+2、html压缩
+new HtmlWebpackPlugin({
+            template: __dirname + '/views/index.html', // new 一个这个插件的实例，并传入相关的参数
+            filename: '../index.html',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+            },
+            chunksSortMode: 'dependency'
+        })
+3、提取公共资源(webpack3写法)
+new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'scripts/common/vendor-[hash:5].js'
+        })
+4、提取css并压缩
+在使用webpack的过程中，通常会以模块的形式引入css文件（webpack的思想不就是万物皆模块嘛），
+但是在上线的时候，还需要将这些css提取出来，并且压缩，这些看似复杂的过程只需要简单的几行配置就行：
+（PS:我们需要用到extract-text-webpack-plugin ，所以还得npm install）
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+module: {
+        rules: [..., {
+            test: /\.css$/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: {
+                    loader: 'css-loader',
+                    options: {
+                        minimize: true
+                    }
+                }
+            })
+        }]
+    }
+5、使用webpack3新特性：ModuleConcatenationPlugin
+new webpack.optimize.ModuleConcatenationPlugin()
+
+
+
+6、服务器上开启Gzip传输压缩
+网站请求的响应头可以看见 Content-Encoding:gzip
+！！不要对图片进行Gzip压缩，对图片进行压缩会占用大量后台资源
