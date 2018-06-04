@@ -16,6 +16,9 @@ body{
 </style>
 <body>
     <div id='test'></div>
+    <div>offsetParent取最近的定位父级元素absolute/relative</div>
+    <div>offsetLeft=offsetParent.padding-left+中间元素offsetWidth+当前元素margin-left</div>
+    <div>offsetParent为parent时。offsetLeft=body.margin-left+body.border+body.padding-left+当前元素margin-left</div>
 </body>
 <script>
     var test=document.getElementById('test');

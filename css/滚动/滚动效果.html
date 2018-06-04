@@ -1,0 +1,57 @@
+<!DOCTYPE>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+  .container{
+      width: 600px;
+      margin: 40px auto;
+  }
+  .list{
+      overflow: hidden;
+      height: 120px;
+  }
+  .list li{
+      height: 30xpx;
+      line-height: 30px;
+  }
+</style>
+<body>
+  <div class="container">
+    <h1>推荐</h1>
+    <div class="list">
+        <ul>
+            <li>1.晗晗</li>
+            <li>2.讨厌你们</li>
+            <li>3.你们凭什么</li>
+            <li>4.自以为是</li>
+            <li>5.滚啊</li>
+        </ul>
+    </div>
+</div>  
+</body>
+<script>
+  const listBox=document.querySelector('.list');
+  listBox.innerHTML+=listBox.innerHTML;
+  listBox.scrollTop=0;
+  const speed=50;
+  let counter=0;
+
+  const callback=()=>{
+      if(listBox.scrollTop>=listBox.scrollHeight/2){
+          counter=0;
+          listBox.scrollTop=counter;
+      }else{
+          listBox.scrollTop=++counter
+      }
+  }
+  let timer=setInterval(callback,speed)
+
+  listBox.addEventListener('mouseover',()=>{
+      clearInterval(timer)
+  })
+  listBox.addEventListener('mouseout',()=>[
+      timer=setInterval(callback,speed)
+  ])
+</script>
