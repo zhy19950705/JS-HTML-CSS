@@ -1,0 +1,27 @@
+<a href="http://www.4399.com">外部链接</a>
+<a href="#">内部链接</a>
+<a id="block-link" href="#">块状链接</a>
+<style>
+    a:link,a:visited{
+        text-decoration: none
+    }
+    a:hover,a:active{
+        text-decoration: underline;
+        color:rgb(189, 221, 74)
+    }
+    a[href^="http:"]{
+        background: url('../a.jpg') no-repeat right top;
+    }
+    #block-link{
+        display: block;
+        width: 6em;
+        background: rgb(226, 109, 109);
+        border:1px solid ;
+        text-align: center;
+        text-decoration: none;
+        color: rgb(52, 211, 99)
+    }
+    #block-link:hover{
+        background: rgb(240, 16, 173)
+    }
+</style>
