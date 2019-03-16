@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .phoneNum::before{
+            content: '\260E';
+            font-size: 15px
+        }
+        .beforeContent::before{
+            content: '<<';
+        }
+        .hamburger{
+
+        }
+        .hamburger::before{
+            content: '';
+            display: block;
+
+            width: 400px;
+            height: 55px;
+
+            border-top: 80px solid #f5b230;
+
+            border-bottom: 50px solid #f5b230;
+        }
+        .hamburger::after{
+
+        }
+    </style>
+</head>
+<body>
+        ::before和::after下特有的content，用于在css渲染中向元素逻辑上的头部或尾部添加内容。
+
+        这些添加不会出现在DOM中，不会改变文档内容，不可复制，仅仅是在css渲染层加入。
+        
+        所以不要用:before或:after展示有实际意义的内容，尽量使用它们显示修饰性内容，例如图标。
+        <p class="phoneNum">12358</p>
+        <h3>1.content属性 ::before和::after必须配合content属性来使用，content用来定义插入的内容，content必须有值，至少是空。默认情况下，伪类元素的display是默认值inline，可以通过设置display:block来改变其显示。</h3>
+        <p class="beforeContent">
+            why
+        </p>
+        <div class="hamburger"></div>
+</body>
+</html>

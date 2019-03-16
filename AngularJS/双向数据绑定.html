@@ -1,0 +1,46 @@
+<body>
+    <button ng-click="increase">increase</button>
+    <button ng-click="decrease">decrease</button>
+    <span ng-bind="data"></span>
+</body>
+<script>
+    'use strict';
+
+    var scope = {
+        increase: function () {
+            this.data++;
+        },
+        decrease: function decrease() {
+            this.data--;
+        },
+        data: 0
+    }
+
+    function bind() {
+        var list = document.querySelectorAll('[ng-click]');
+        for (var i = 0, l = list.length; i < l; i++) {
+            list[i].onclick = (function (index) {
+                return function () {
+                    var func = this.getAttribute('ng-click');
+                    scope[func](scope);
+                    apply();
+                }
+            })(i);
+        }
+    }
+
+    // apply
+    function apply() {
+        var list = document.querySelectorAll('[ng-bind]');
+        for (var i = 0, l = list.length; i < l; i++) {
+            var bindData = list[i].getAttribute('ng-bind');
+            list[i].innerHTML = scope[bindData];
+        }
+    }
+
+    bind();
+    apply();
+</script>
+<!-- 另外，由于双向绑定机制，在DOM操作中，虽然更新了数据的值，但是并没有立即反映到界面上，而是通过 apply() 来反映到界面上，从而完成职责的分离，可以认为是单一职责模式了。
+在真正的Angular中，ng-click 封装了click，然后调用一次 apply 函数，把数据呈现到界面上
+在Angular 的apply函数中，这里先进行脏检测，看 oldValue 和 newVlue 是否相等，如果不相等，那么讲newValue 反馈到界面上，通过如果通过 $watch 注册了 listener事件，那么就会调用该事件。 -->
