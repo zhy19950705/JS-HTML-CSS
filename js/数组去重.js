@@ -16,3 +16,7 @@ const unique=arr=>{
 unique(a)
 // 这个方法会将number,NaN,undefined,null，变为字符串形式，因为对象的属性名就是一个字符串，
 console.log(...(new Set([1,1,1,2])))
+
+/* Array.filter()  
+Object.is() 相等判断*/
+const unique2 = (arr) => { arr.filter((value,index) => Object.is(index === arr.indexOf(value)))}

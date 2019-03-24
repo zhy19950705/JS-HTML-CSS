@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 使用伪类 */
+        .father:after {
+            clear: both;
+            content: "";
+            display: block;
+        }
+
+        .father {
+            zoom: 1
+                /* IE专有属性，解决ie6、7浮动问题 */
+        }
+
+        /* 父级标签触发BFC */
+        .father {
+            overflow: auto;
+            zoom: 1
+        }
+        .wrap {
+            overflow: hidden;
+            /* overflow: auto; */
+        }
+        section {
+            border: 1px solid blue;
+            margin: 0 0 10px 0;
+        }
+        img {
+            float: left;
+        }
+        p {
+            margin: 0;
+            font-size: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="wrap">
+        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550750988751&di=62a1a86adc35c6a0c83d309aba1806ac&imgtype=0&src=http%3A%2F%2Fi1.hdslb.com%2Fbfs%2Fface%2F18ce9edfe5a36ea16a1817b616e728a23d170e27.jpg">
+        <p>
+            这是一只猫
+        </p>
+    </section>
+</body>
+
+</html>
