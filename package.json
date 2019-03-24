@@ -1,6 +1,10 @@
 {
   "name": "",
   "version": "",
+  "scripts": {
+    "build": "",
+    "start": "set NODE_ENV=development && webpack-dev-server --display-modules  --progress --colors --display-error-details --profile --config ./webpack/webpack.dev.js"
+  },
   "dependencies": {
     "@types/jquery": "^3.3.2",
     "lie": "^3.3.0",
@@ -8,6 +12,8 @@
   },
   "devDependencies": {
     "lodash": "^4.17.11",
-    "ts-node": "^8.0.2"
+    "ts-node": "^8.0.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   }
 }
