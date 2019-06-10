@@ -30,3 +30,9 @@
     const debounce = function (func, wait) {
         return limit(func, wait, true);
     };
+
+    document.getElementById('testBtn').onclick = function() {
+        debounce(function() {
+            console.time;
+        }, 500, true);
+    };

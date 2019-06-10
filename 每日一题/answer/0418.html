@@ -1,0 +1,87 @@
+<style>
+    /* transform只执行一次，而@keyframes动画是循环的 */
+    @keyframes change {
+        0% {
+            background: red
+        }
+        100% {
+            background: black;
+            border-radius: 100%
+        }
+    }
+    .box1 {
+        width: 100px;
+        height: 100px;
+        background: red
+    }
+    .box1:hover{
+        animation: change 2s infinite linear;
+        -ms-zoom-animation: change 2s infinite linear;
+        -webkit-animation: change 2s;
+        -moz-animation: change 2s;
+    }
+    .box2{
+        width: 100px;
+        height: 100px;
+        background: black;
+        transform: rotate(30deg)
+    }
+</style>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+</body>
+<script>
+    class LazyWhyClass {
+        constructor(name) {
+            this.name = name;
+            this.funcArr = [];
+            console.log(this.name);
+            setTimeout(() => {
+                this.next();
+            }, 1);
+        }
+        eat(name) {
+            let fn = () => {
+                console.log(`eat ${name}`);
+                this.next();
+            };
+            this.funcArr.push(fn);
+            return this;
+        }
+        sleep(time) {
+            let fn = () => {
+                setTimeout(() => {
+                    console.log(`sleep ${time} seconds`);
+                    this.next();
+                }, time * 1000);
+            };
+            this.funcArr.push(fn);
+            return this;
+        }
+        sleepFirst(time) {
+            let fn = () => {
+                setTimeout(() => {
+                    console.log(`sleepFirst ${time} seconds`);
+                    this.next();
+                }, time * 1000);
+            };
+            this.funcArr.unshift(fn);
+            return this;
+        }
+        next() {
+            let fn = this.funcArr.shift();
+            fn && fn();
+        }
+    }
+
+    function lazyWhy(name) {
+        return new LazyWhyClass(name);
+    }
+    lazyWhy("why")
+        .eat("hh")
+        .sleep(3)
+        .eat("hh again")
+        .sleepFirst(3);
+</script>
