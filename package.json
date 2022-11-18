@@ -11,7 +11,7 @@
     "angular": "^1.6.5",
     "angular-ui-router": "^1.0.22",
     "axios": "^0.18.0",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "lie": "^3.3.0",
     "typescript": "^3.3.3333"
   },
